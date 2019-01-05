@@ -1,0 +1,30 @@
+# EDITOR Configs
+# PyCharm
+.idea
+# VS Code
+.vscode
+
+# Python specific files
+*.pyc
+*.pyo
+
+# Generic files to ignore
+*~
+._*
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.patch
+*.diff
+*.empty
+*.orig
+*.noseids
+*.cprof
+.venv
+.coverage
+.pip
+coverage.xml
+htmlcov
+nosetests_*.xml
+tags

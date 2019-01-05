@@ -1,0 +1,56 @@
+FROM python:2.7
+EXPOSE 5000
+
+WORKDIR /usr/src/code
+
+RUN apt-get update && apt-get install -y \
+    firefox-esr\
+    chromium \
+    git-core\
+    xvfb\
+    xsel\
+    unzip\
+    libgconf2-4\
+    libncurses5 \
+    libxml2-dev\
+    libxslt-dev \
+    libz-dev \
+    xclip
+
+RUN wget -q "https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" -O /tmp/geckodriver.tgz \
+    && tar zxf /tmp/geckodriver.tgz -C /usr/bin/ \
+    && rm /tmp/geckodriver.tgz
+
+RUN wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip" -O /tmp/chromedriver.zip \
+    && unzip /tmp/chromedriver.zip -d /usr/bin/ \
+    && rm /tmp/chromedriver.zip
+
+
+ADD xvfb-chromium /usr/bin/xvfb-chromium
+
+RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome \
+    && chmod 777 /usr/bin/xvfb-chromium
+
+RUN ln -s /usr/bin/geckodriver /usr/bin/chromium-browser \
+    && chmod 777 /usr/bin/geckodriver \
+    && chmod 777 /usr/bin/chromium-browser
+
+RUN pip install selenium
+
+RUN pip install webdriver_manager
+
+# RUN wget -O chromedriver.zip https://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip && unzip chromedriver.zip -d /usr/driver
+
+# RUN export PATH="$PATH:/usr/driver/chromedriver"
+
+COPY . /usr/src/code
+
+RUN Xvfb :10 -ac &
+
+RUN export DISPLAY=:10
+
+# RUN java -jar selenium-server-standalone-2.44.0.jar
+
+# CMD ["python", "send_message.py","My Message from Python" "09084678574"]
+
+CMD python send_message.py "My Message from Python" "09084678574"
