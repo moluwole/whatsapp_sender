@@ -16,3 +16,5 @@ phone.
 * Send message to a non-contact number
 * Load phone numbers from a list  (csv, db or text file) and send a broadcast message
 
+## Bugs
+Selenium still not working out of the box on docker. Still needs a little bit of tweaking
