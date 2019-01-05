@@ -8,6 +8,9 @@
 This is a very simple python script to send a message to a whatsapp contact on your 
 phone.
 
+## To run
+``python send_message.py "Your message" "Friend's name"``
+
 ## Drawbacks
 * Contact needs to be on your phone
 
